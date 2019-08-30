@@ -1,21 +1,36 @@
-import React from "react"
-import { Link } from "gatsby"
-
-import Layout from "../components/layout"
-import Image from "../components/image"
+import React, { useEffect, useState } from "react"
+import sample from "lodash/sample"
+import Result from "../components/Result/"
+import Layout from "../components/Layout/"
 import SEO from "../components/seo"
+import TextInput from "../components/TextInput/"
+import Emoji from "../components/Emoji/"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+import emojis from "../utils/emojis"
+
+const IndexPage = () => {
+  const [input, setInput] = React.useState("")
+  const [result, setTheResult] = useState([])
+
+  useEffect(() => {
+    setInput(input)
+    const lastLetter = input[input.length - 1] || ""
+    const lastLetterEmoji = sample(emojis[lastLetter.toLowerCase()])
+    setTheResult(oldResult =>
+      [
+        ...oldResult,
+        <Emoji key={oldResult.length} symbol={lastLetterEmoji}></Emoji>,
+      ].slice(0, input.length)
+    )
+  }, [input])
+
+  return (
+    <Layout>
+      <SEO title="Home" />
+      <TextInput value={input} setInput={setInput}></TextInput>
+      <Result result={result}></Result>
+    </Layout>
+  )
+}
 
 export default IndexPage
