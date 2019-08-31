@@ -1,12 +1,27 @@
 import React from "react"
-const Emoji = props => (
-  <span
-    className="emoji"
-    role="img"
-    aria-label={props.label ? props.label : ""}
-    aria-hidden={props.label ? "false" : "true"}
+import { Text, Box } from "grommet"
+
+const Emoji = ({ label, symbol }) => (
+  <Box
+    animation={{
+      type: "zoomIn",
+      delay: 0,
+      duration: 300,
+      size: "large",
+    }}
+    align="center"
+    justify="center"
+    direction="row"
   >
-    {props.symbol}
-  </span>
+    <Text
+      role="img"
+      aria-label={label || ""}
+      aria-hidden={label ? "false" : "true"}
+      size="60px"
+      as="span"
+    >
+      {symbol}
+    </Text>
+  </Box>
 )
 export default Emoji

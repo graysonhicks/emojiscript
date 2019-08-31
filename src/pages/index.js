@@ -16,9 +16,11 @@ const IndexPage = () => {
   const [result, setTheResult] = useState([])
 
   useEffect(() => {
-    setInput(input)
+    // TODO: Find way of getting location of cursor so emoji can be
+    // inserted in the middle, not just appended.
     const lastLetter = input[input.length - 1] || ""
     const lastLetterEmoji = sample(emojis[lastLetter.toLowerCase()])
+
     setTheResult(oldResult =>
       [
         ...oldResult,

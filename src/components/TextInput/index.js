@@ -8,12 +8,13 @@ const TextInput = ({ input, setInput }) => {
       direction="row"
       width="100%"
       justify="center"
+      animation="slideUp"
     >
       <Box width="large">
         <GTextInput
           placeholder="Type your text here :)"
           value={input}
-          onChange={event => setInput(event.target.value)}
+          onChange={e => setInput(e.target.value)}
         />
       </Box>
     </Box>
