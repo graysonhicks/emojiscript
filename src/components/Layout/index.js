@@ -5,11 +5,13 @@ import { createGlobalStyle } from "styled-components"
 import { Box } from "grommet"
 
 import Header from "../Header/"
+import Footer from "../Footer"
 
 const GlobalStyle = createGlobalStyle`
-  body {
+  html, body {
     margin: 0;
     height: 100vh;
+    
   }
 `
 
@@ -27,14 +29,14 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle></GlobalStyle>
-      <Header siteTitle={data.site.siteMetadata.title} />
-      <Box align="center" justify="center" pad="small" height="100vh">
-        <Box width="large" as="main">
+
+      <Box height="100vh" width="100%">
+        <Header siteTitle={data.site.siteMetadata.title} />
+        <Box width="100%" height="large" as="main">
           {children}
         </Box>
+        <Footer />
       </Box>
-
-      <footer>Footer</footer>
     </>
   )
 }

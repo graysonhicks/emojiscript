@@ -1,13 +1,22 @@
 import React from "react"
-import { TextInput as GTextInput } from "grommet"
+import { Box, TextInput as GTextInput } from "grommet"
 
 const TextInput = ({ input, setInput }) => {
   return (
-    <GTextInput
-      placeholder="type here"
-      value={input}
-      onChange={event => setInput(event.target.value)}
-    />
+    <Box
+      margin={{ bottom: "large" }}
+      direction="row"
+      width="100%"
+      justify="center"
+    >
+      <Box width="large">
+        <GTextInput
+          placeholder="Type your text here :)"
+          value={input}
+          onChange={event => setInput(event.target.value)}
+        />
+      </Box>
+    </Box>
   )
 }
 

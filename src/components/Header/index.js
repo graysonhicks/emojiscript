@@ -3,7 +3,7 @@ import { Box, Text } from "grommet"
 
 const Header = () => {
   return (
-    <Box direction="row" background="brand" pad="medium">
+    <Box direction="row" background="brand" pad="medium" width="100%">
       <Text>EmojiScript</Text>
     </Box>
   )
