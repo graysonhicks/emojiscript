@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import sample from "lodash/sample"
-import { Grommet } from "grommet"
+import { animated, useSpring } from "react-spring"
+import { Grommet, Button, Box } from "grommet"
 import { grommet } from "grommet/themes"
 import Result from "../components/Result/"
 import Layout from "../components/Layout/"
@@ -11,31 +12,56 @@ import Title from "../components/Title"
 
 import emojis from "../utils/emojis"
 
+const ClearButton = animated(Button)
+
 const IndexPage = () => {
   const [input, setInput] = React.useState("")
   const [result, setTheResult] = useState([])
+  const fadeButton = useSpring({
+    opacity: result.length > 0 || input.length > 0 ? 1 : 0,
+  })
 
-  useEffect(() => {
-    // TODO: Find way of getting location of cursor so emoji can be
-    // inserted in the middle, not just appended.
-    const lastLetter = input[input.length - 1] || ""
-    const lastLetterEmoji = sample(emojis[lastLetter.toLowerCase()])
+  const handleEmoji = () => {
+    const emojiArray = []
+    for (let i = 0; i < input.length; i++) {
+      const element = input[i]
+      const letterEmoji = sample(emojis[element.toLowerCase()])
+      emojiArray.push(<Emoji key={`${letterEmoji}${i}`} symbol={letterEmoji} />)
+    }
+    setTheResult(emojiArray)
+  }
 
-    setTheResult(oldResult =>
-      [
-        ...oldResult,
-        <Emoji key={oldResult.length} symbol={lastLetterEmoji}></Emoji>,
-      ].slice(0, input.length)
-    )
-  }, [input])
+  const clearResult = () => {
+    setTheResult([])
+    setInput("")
+  }
 
   return (
     <Grommet theme={grommet}>
       <Layout>
         <SEO title="Home" />
         <Title />
-        <TextInput value={input} setInput={setInput}></TextInput>
-        <Result result={result}></Result>
+        <Box direction="row" justify="center" align="center">
+          <TextInput input={input} setInput={setInput} />
+          <Button
+            label="Emojify"
+            fill="vertical"
+            onClick={handleEmoji}
+            margin={{ right: "small" }}
+          />
+
+          <ClearButton
+            style={fadeButton}
+            label="Clear"
+            fill="vertical"
+            color="neutral-3"
+            onClick={clearResult}
+            disabled={result.length == 0 && input.length == 0}
+          />
+        </Box>
+        <Box align="center" pad="medium">
+          <Result result={result}></Result>
+        </Box>
       </Layout>
     </Grommet>
   )

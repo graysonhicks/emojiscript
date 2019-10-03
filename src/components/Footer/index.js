@@ -10,7 +10,7 @@ const Footer = () => {
       pad="medium"
       width="100%"
     >
-      Footer
+      By Grayson Hicks
     </Box>
   )
 }
