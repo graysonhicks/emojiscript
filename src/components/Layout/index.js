@@ -29,10 +29,9 @@ const Layout = ({ children }) => {
   return (
     <>
       <GlobalStyle></GlobalStyle>
-
       <Box height="100vh" width="100%">
         <Header siteTitle={data.site.siteMetadata.title} />
-        <Box width="100%" height="large" as="main">
+        <Box width="100%" height="large" as="main" justify="center">
           {children}
         </Box>
         <Footer />

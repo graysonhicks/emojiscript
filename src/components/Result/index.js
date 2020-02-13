@@ -1,11 +1,10 @@
 import React from "react"
 import { animated, useTransition } from "react-spring"
-import { Box } from "grommet"
+import { Box, Text } from "grommet"
 
-const AnimatedBox = animated(Box)
+const AnimatedBox = animated(Text)
 
-const Result = ({ result }) => {
-  const height = "60px"
+const Result = ({ result, ...rest }) => {
   const transitions = useTransition(result, item => item.key, {
     from: {
       opacity: 0,
@@ -26,11 +25,11 @@ const Result = ({ result }) => {
   })
   return (
     <Box
-      justify="center"
-      height="small"
+      justify={rest.justify || "center"}
+      height={rest.height || "small"}
       overflow="hidden"
-      align="center"
-      width="large"
+      align={rest.align || "center"}
+      width={rest.width || "large"}
       direction="row"
       wrap={true}
     >
