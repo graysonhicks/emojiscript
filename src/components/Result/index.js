@@ -34,11 +34,15 @@ const Result = ({ result, ...rest }) => {
       wrap={true}
     >
       {result.length
-        ? transitions.map(({ item, props, key }) => (
-            <AnimatedBox key={key} style={props}>
-              {item}
-            </AnimatedBox>
-          ))
+        ? transitions.map(({ item, props, key }) =>
+            item === " " ? (
+              <Box width="60px" />
+            ) : (
+              <AnimatedBox key={key} style={props}>
+                {item}
+              </AnimatedBox>
+            )
+          )
         : "Result here..."}
     </Box>
   )

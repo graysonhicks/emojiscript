@@ -44,7 +44,13 @@ const IndexPage = () => {
     for (let i = 0; i < input.length; i++) {
       const element = input[i]
       const letterEmoji = sample(emojis[element.toLowerCase()])
-      emojiArray.push(<Emoji key={`${letterEmoji}${i}`} symbol={letterEmoji} />)
+      if (letterEmoji) {
+        emojiArray.push(
+          <Emoji key={`${letterEmoji}${i}`} symbol={letterEmoji} />
+        )
+      } else {
+        emojiArray.push(" ")
+      }
     }
     setTheResult(emojiArray)
   }
